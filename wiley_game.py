@@ -2,7 +2,6 @@ import streamlit as st
 import random
 import time
 from questions import question_bank
-from sheets import save_score_to_sheet, load_scores_from_sheet
 from datetime import datetime
 
 # Page setup
@@ -44,7 +43,6 @@ if 'started' not in st.session_state:
     st.session_state.score = 0
     st.session_state.round_start_time = 0
     st.session_state.answered = False
-    st.session_state.player_name = ""
     st.session_state.wheel_spin = False
 
 # Header
@@ -54,17 +52,8 @@ with col2:
     st.markdown(f'<div class="big-title">{GAME_TITLE}</div>', unsafe_allow_html=True)
     st.markdown(f'<div class="subtitle">🎤 {SLOGAN}</div>', unsafe_allow_html=True)
 
-# Sidebar Leaderboard
-st.sidebar.title("🎛️ Game Controls")
-st.sidebar.markdown("### 🏆 Leaderboard")
-scores = load_scores_from_sheet()
-for i, s in enumerate(scores[:10], 1):
-    st.sidebar.markdown(f"**{i}.** {s['user']} – {s['score']} pts ({s['category']})")
-
 # Start Screen
 if not st.session_state.started:
-    st.session_state.player_name = st.text_input("Enter your name to start 👤")
-
     categories = list(question_bank.keys())
     st.markdown("### 🎡 Spin the Wheel or Pick a Category")
 
@@ -82,7 +71,7 @@ if not st.session_state.started:
             selected_manual = pick
             st.success(f"🎉 Your category is: **{pick}**")
 
-    if st.button("Start Game!") and st.session_state.player_name:
+    if st.button("Start Game!"):
         st.session_state.selected_category = selected_manual
         st.session_state.started = True
         st.session_state.q_index = 0
@@ -137,9 +126,6 @@ elif st.session_state.q_index < QUESTION_LIMIT:
 # Game Over
 else:
     st.success(f"🎉 You scored {st.session_state.score} out of {QUESTION_LIMIT}!")
-    if st.session_state.player_name:
-        save_score_to_sheet(st.session_state.player_name, st.session_state.score, st.session_state.selected_category)
-
     if st.button("Play Again"):
         for key in list(st.session_state.keys()):
             del st.session_state[key]
