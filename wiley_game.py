@@ -48,7 +48,7 @@ if 'started' not in st.session_state:
 # Header
 col1, col2, col3 = st.columns([1, 2, 1])
 with col2:
-    st.image("assets/WWWLogo1.png", use_column_width=True)
+    st.image("assets/WWWLogo1.png", use_container_width=True)
     st.markdown(f'<div class="big-title">{GAME_TITLE}</div>', unsafe_allow_html=True)
     st.markdown(f'<div class="subtitle">🎤 {SLOGAN}</div>', unsafe_allow_html=True)
 
