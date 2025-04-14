@@ -106,7 +106,7 @@ elif st.session_state.q_index < QUESTION_LIMIT:
 
     if remaining <= 0:
         st.warning("⏰ Time's up for the round!")
-        st_audio(TIMEOUT_SOUND, autoplay=True)
+        st.audio(TIMEOUT_SOUND, format="audio/wav", start_time=0)
         st.session_state.q_index = QUESTION_LIMIT
         st.experimental_rerun()
 
@@ -122,10 +122,10 @@ elif st.session_state.q_index < QUESTION_LIMIT:
                 if selected == q["answer"]:
                     st.success("🎯 Correct! You nailed it!")
                     st.session_state.score += 1
-                    st_audio(CORRECT_SOUND, autoplay=True)
+                    st.audio(CORRECT_SOUND, format="audio/wav", start_time=0)
                 else:
                     st.error("🚫 Nope! That’s not right.")
-                    st_audio(WRONG_SOUND, autoplay=True)
+                    st.audio(WRONG_SOUND, format="audio/wav", start_time=0)
                 st.session_state.answered = True
 
         if st.session_state.answered:
