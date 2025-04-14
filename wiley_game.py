@@ -15,9 +15,9 @@ SLOGAN = "Ready, Set… WHAT?!"
 ROUND_TIME_LIMIT = 60
 QUESTION_LIMIT = 3
 
-CORRECT_SOUND = "assets/correct.mp3"
-WRONG_SOUND = "assets/wrong.mp3"
-TIMEOUT_SOUND = "assets/timeout.mp3"
+CORRECT_SOUND = "assets/correct.wav"
+WRONG_SOUND = "assets/wrong.wav"
+TIMEOUT_SOUND = "assets/timeout.wav"
 
 # Custom Styles
 st.markdown("""
