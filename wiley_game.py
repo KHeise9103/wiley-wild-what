@@ -1,7 +1,6 @@
 import streamlit as st
 import random
 import time
-from streamlit_extras.audio import st_audio
 from questions import question_bank
 from sheets import save_score_to_sheet, load_scores_from_sheet
 from datetime import datetime
